@@ -14,6 +14,9 @@ import NewPoll from '../poll/NewPoll';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
+import Home from '../home/Home';
+import AddItem from '../addItem/addItem';
+import SingleItem from '../singleItem/singleItem';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -108,6 +111,9 @@ class App extends Component {
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
+                <Route path="/home" component={Home}></Route>
+                <Route path="/additem" component={AddItem}></Route>
+                <Route path="/item" component={SingleItem}></Route>
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
