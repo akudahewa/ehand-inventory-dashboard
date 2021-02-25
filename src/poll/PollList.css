@@ -1,10 +1,40 @@
 .no-polls-found {
-    font-size: 20px;
-    text-align: center;
-    padding: 20px;    
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
 }
 
 .load-more-polls {
-    text-align: center;
-    margin-bottom: 40px;    
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.catItemContainer {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.singleCatItem {
+  width: 250px;
+  min-height: 150px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px;
+  
+}
+
+.cat-inventry{
+    background-color: #259392 !important;
+}
+.catItemLabel{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+.catItemIcon{
+    color: rgb(231, 213, 213);
 }
