@@ -45,17 +45,20 @@ class App extends Component {
   }
 
   loadCurrentUser() {
+    console.log("UI- App.js -> inside loadCurrentUser()")
     this.setState({
       isLoading: true
     });
     getCurrentUser()
     .then(response => {
+      console.log("UI- App.js -> inside loadCurrentUser() ->success :"+JSON.stringify(response))
       this.setState({
         currentUser: response,
         isAuthenticated: true,
         isLoading: false
       });
     }).catch(error => {
+      console.log("UI- App.js -> loadCurrentUser() ->error :"+error);
       this.setState({
         isLoading: false
       });  
@@ -63,6 +66,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log("UI- APP.js -> componentDidMount");
     this.loadCurrentUser();
   }
 
@@ -83,6 +87,7 @@ class App extends Component {
   }
 
   handleLogin() {
+    console.log("UI- App.js handleLogin() ")
     notification.success({
       message: 'Polling App',
       description: "You're successfully logged in.",
