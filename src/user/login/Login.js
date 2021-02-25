@@ -28,10 +28,12 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
+        console.log("UI- Login.js -> login submit button click")
         event.preventDefault();   
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const loginRequest = Object.assign({}, values);
+                console.log("UI- Login.js -> login submit, login method is calling- loginRequest,"+JSON.stringify(loginRequest));
                 login(loginRequest)
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);

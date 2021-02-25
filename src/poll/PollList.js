@@ -5,11 +5,14 @@ import { castVote } from '../util/APIUtils';
 import LoadingIndicator  from '../common/LoadingIndicator';
 import { Button, Icon, notification } from 'antd';
 import { POLL_LIST_SIZE } from '../constants';
-import { withRouter } from 'react-router-dom';
+import { withRouter,Redirect } from 'react-router-dom';
 import './PollList.css';
 
 class PollList extends Component {
     constructor(props) {
+        console.log("UI- PollList.js -> between constructor ")
+        console.log("UI- PollList.js ->props :"+JSON.stringify(props))
+        console.log("UI- PollList.js -> between constructor ")
         super(props);
         this.state = {
             polls: [],
@@ -26,6 +29,7 @@ class PollList extends Component {
     }
 
     loadPollList(page = 0, size = POLL_LIST_SIZE) {
+        console.log("PollList.js -> inside loadPollList()-> props :"+JSON.stringify(this.props))
         let promise;
         if(this.props.username) {
             if(this.props.type === 'USER_CREATED_POLLS') {
@@ -69,10 +73,12 @@ class PollList extends Component {
     }
 
     componentDidMount() {
+        console.log("UI- PollList.js -> componentDidMount() ")
         this.loadPollList();
     }
 
     componentDidUpdate(nextProps) {
+        console.log("UI- PollList.js -> componentDidUpdate() ")
         if(this.props.isAuthenticated !== nextProps.isAuthenticated) {
             // Reset State
             this.setState({
@@ -140,10 +146,25 @@ class PollList extends Component {
             }
         });
     }
+    
+    privilegeMatrix(previlege){
+       console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser) 
+       console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege)) 
+       if(this.props.currentUser.privileges.includes(previlege)){
+           return true
+       }else{
+           return false;
+       }
+       
+    }
 
     render() {
-        const pollViews = [];
-        this.state.polls.forEach((poll, pollIndex) => {
+        if(!this.props.isAuthenticated) {
+            return (<Redirect to={{pathname:"/login"}} />);
+        }else{
+
+            const pollViews = [];
+            this.state.polls.forEach((poll, pollIndex) => {
             pollViews.push(<Poll 
                 key={poll.id} 
                 poll={poll}
@@ -154,6 +175,9 @@ class PollList extends Component {
 
         return (
             <div className="polls-container">
+                
+                <Button type="primary" disabled={!this.privilegeMatrix("LISTING_PRIVILEGE")} >Inventory Manager</Button>
+                <Button type="primary" disabled={!this.privilegeMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button>
                 {pollViews}
                 {
                     !this.state.isLoading && this.state.polls.length === 0 ? (
@@ -176,6 +200,10 @@ class PollList extends Component {
                 }
             </div>
         );
+
+        }
+        
+        
     }
 }
 

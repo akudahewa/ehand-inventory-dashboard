@@ -9,7 +9,8 @@ import {
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
 } from '../../constants';
 
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, notification,Dropdown,Menu } from 'antd';
+// import { DownOutlined, UserOutlined } from '@ant-design/icons';
 const FormItem = Form.Item;
 
 class Signup extends Component {
@@ -34,6 +35,7 @@ class Signup extends Component {
         this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
         this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
+        
     }
 
     handleInputChange(event, validationFun) {
@@ -81,7 +83,7 @@ class Signup extends Component {
             this.state.password.validateStatus === 'success'
         );
     }
-
+     
     render() {
         return (
             <div className="signup-container">
@@ -141,6 +143,7 @@ class Signup extends Component {
                                 value={this.state.password.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
                         </FormItem>
+                        
                         <FormItem>
                             <Button type="primary" 
                                 htmlType="submit" 
