@@ -8,12 +8,16 @@
     line-height: 64px;
     font-size: 21px;
     display: inline-block;
+    color: #259392;
   }
   
   .app-title a:hover {
     text-decoration: none;
   }
   
+  a{
+    color: #259392;
+  }
   .app-header {
     position: fixed;
     width: 100%;
@@ -69,6 +73,15 @@
 
   .poll-icon {
     margin-top: -4px;
+  }
+
+  .app-menu > li > a:hover {
+   color: #259392 !important;
+  }
+
+  .app-menu > li:hover {
+    border-bottom: 2px solid #259392 !important;
+    color: #259392 !important;
   }
 
 @media (max-width: 768px) {

@@ -27,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
+    background:'#259392',
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      background:'#259392',
     },
   },
   menuButton: {
@@ -142,7 +144,7 @@ function AddItem(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography style={{color:'#fff'}} variant="h6" noWrap>
             Add Item
           </Typography>
         </Toolbar>
@@ -253,7 +255,7 @@ function AddItem(props) {
                   type="file"
                 />
                 <label htmlFor="contained-button-file">
-                  <Button variant="contained" color="primary" component="span">
+                  <Button variant="contained" style={{background:'#259392', color:'#fff'}} component="span">
                     Upload
                   </Button>
                 </label>
@@ -261,8 +263,8 @@ function AddItem(props) {
             </div>
           </div>
 
-          <Button variant="contained" color="primary" onClick={MyAlert}>
-            Primary
+          <Button variant="contained" style={{background:'#259392', color:'#fff'}} onClick={MyAlert}>
+            Add Item
           </Button>
         </form>
       </main>

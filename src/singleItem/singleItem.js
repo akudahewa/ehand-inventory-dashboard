@@ -28,9 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
+    background:'#259392',
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      background:'#259392'
     },
   },
   menuButton: {
@@ -128,7 +130,7 @@ function SingleItem(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography style={{color:'#fff'}} variant="h6" noWrap>
             Item Details
           </Typography>
         </Toolbar>

@@ -30,9 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
+    background:'#259392',
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      background:'#259392'
     },
   },
   menuButton: {
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    background:"#fafafa"
   },
   searchDiv: {
     width: "100%",
@@ -92,7 +95,7 @@ function Home(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography style={{color:'#fff'}} variant="h6" noWrap>
             Dashboard
           </Typography>
         </Toolbar>
@@ -129,7 +132,7 @@ function Home(props) {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        {/* <div className={classes.toolbar} /> */}
         <div className={classes.searchDiv}>
           <Search />
         </div>
