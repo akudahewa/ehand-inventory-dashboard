@@ -73,7 +73,7 @@ export default function DrawerComponent() {
           </ListItemIcon>
           <ListItemText>Add Item</ListItemText>
         </ListItem>
-        <ListItem button={true} {...{ component: NavLink, to: "/signin" }}>
+        <ListItem button={true} {...{ component: NavLink, to: "/login" }}>
           <ListItemIcon>
             <ExitToAppIcon style={{ color: '#ff212b' }} />
           </ListItemIcon>

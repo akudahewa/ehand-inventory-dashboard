@@ -7,13 +7,19 @@
 .signup-form-button {
     width: 100%;
     margin-top: 15px;
+    background-color: #259392;
+    border-color: #259392;
+}
+.signup-form-button:hover{
+    background-color: #42adac;
+    border-color: #42adac;
 }
 
 .signup-form-button[disabled], .signup-form-button[disabled]:hover, .signup-form-button[disabled]:focus {
     opacity: 0.6;
     color: #fff;
-    background-color: #1890ff;
-    border-color: #1890ff;
+    background-color: #80bebd;
+    border-color: #8cbbba;
 }
 
 .signup-form input {

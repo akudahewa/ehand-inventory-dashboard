@@ -7,4 +7,10 @@
 
 .login-form-button {
     width: 100%;
+    background-color: #259392;
+    border-color: #259392;
+}
+.login-form-button:hover{
+    background-color: #42adac;
+    border-color: #42adac;
 }
