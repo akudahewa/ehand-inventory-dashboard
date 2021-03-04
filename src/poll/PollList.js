@@ -164,16 +164,16 @@ class PollList extends Component {
       });
   }
 
-  // privilegeMatrix(previlege){
-  //    console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser)
-  //    console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege))
-  //    if(this.props.currentUser.privileges.includes(previlege)){
-  //        return true
-  //    }else{
-  //        return false;
-  //    }
+  privilegeMatrix(previlege){
+     console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser)
+     console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege))
+     if(this.props.currentUser.privileges.includes(previlege)){
+         return true
+     }else{
+         return false;
+     }
 
-  // }
+  }
 
   render() {
     if (!this.props.isAuthenticated) {
@@ -208,11 +208,52 @@ class PollList extends Component {
                 <div className="catItemLabel">Inventry Management</div>
               </Paper>
             </Link>
+            <Button type="primary" disabled={!this.privilegeMatrix("LISTING_PRIVILEGE")} >Inventory Manager</Button>
+                <Button type="primary" disabled={!this.privilegeMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button>
           </Container>
+          </div>
+      )
+    }
+  }
+}
 
-          {/* <Button type="primary" disabled={!this.privilegeMatrix("LISTING_PRIVILEGE")} >Inventory Manager</Button>
-                <Button type="primary" disabled={!this.privilegeMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button> */}
+          
           {/* {pollViews}
+        });
+    }
+    
+    privilegeMatrix(previlege){
+       console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser) 
+      // console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege)) 
+     //  if(this.props.currentUser.privileges.includes(previlege)){
+           return true
+       //}else{
+       //    return false;
+       //}
+       
+    }
+
+    render() {
+        // if(!this.props.isAuthenticated) {
+        //     return (<Redirect to={{pathname:"/login"}} />);
+        // }else{
+
+            const pollViews = [];
+            this.state.polls.forEach((poll, pollIndex) => {
+            pollViews.push(<Poll 
+                key={poll.id} 
+                poll={poll}
+                currentVote={this.state.currentVotes[pollIndex]} 
+                handleVoteChange={(event) => this.handleVoteChange(event, pollIndex)}
+                handleVoteSubmit={(event) => this.handleVoteSubmit(event, pollIndex)} />)            
+        });
+
+        return (
+            <div className="polls-container">
+                
+                <Button type="primary" disabled={!this.privilegeMatrix("LISTING_PRIVILEGE")} >Inventory Manager</Button>
+                <Button type="primary" disabled={!this.privilegeMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button>
+                {pollViews}
                 {
                     !this.state.isLoading && this.state.polls.length === 0 ? (
                         <div className="no-polls-found">
@@ -231,11 +272,18 @@ class PollList extends Component {
                 {
                     this.state.isLoading ? 
                     <LoadingIndicator />: null                     
-                } */}
-        </div>
-      );
-    }
-  }
-}
+//                 } */}
+//         </div>
+//       );
+//                 }
+//             </div>
+//         );
+
+//        // }
+        
+        
+//     }
+//   }
+// }
 
 export default withRouter(PollList);

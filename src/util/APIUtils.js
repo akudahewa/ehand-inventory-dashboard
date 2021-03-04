@@ -65,6 +65,15 @@ export function signup(signupRequest) {
     });
 }
 
+export function sendPasswordResetToken(passwordResetToken){
+    return request({
+        url: API_BASE_URL + "/auth/forgot-password",
+        method: 'POST',
+        body: JSON.stringify(passwordResetToken)
+    })
+
+}
+
 export function checkUsernameAvailability(username) {
     return request({
         url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
