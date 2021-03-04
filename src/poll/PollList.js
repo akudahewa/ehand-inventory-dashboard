@@ -149,19 +149,19 @@ class PollList extends Component {
     
     privilegeMatrix(previlege){
        console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser) 
-       console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege)) 
-       if(this.props.currentUser.privileges.includes(previlege)){
+      // console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege)) 
+     //  if(this.props.currentUser.privileges.includes(previlege)){
            return true
-       }else{
-           return false;
-       }
+       //}else{
+       //    return false;
+       //}
        
     }
 
     render() {
-        if(!this.props.isAuthenticated) {
-            return (<Redirect to={{pathname:"/login"}} />);
-        }else{
+        // if(!this.props.isAuthenticated) {
+        //     return (<Redirect to={{pathname:"/login"}} />);
+        // }else{
 
             const pollViews = [];
             this.state.polls.forEach((poll, pollIndex) => {
@@ -201,7 +201,7 @@ class PollList extends Component {
             </div>
         );
 
-        }
+       // }
         
         
     }

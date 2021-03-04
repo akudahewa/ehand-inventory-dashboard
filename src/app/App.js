@@ -5,7 +5,7 @@ import {
   withRouter,
   Switch
 } from 'react-router-dom';
-
+import { Redirect } from "react-router";
 import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
@@ -14,6 +14,7 @@ import NewPoll from '../poll/NewPoll';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
+import ForgotPassword from '../user/forgot-password/ForgotPassword';
 import Home from '../home/Home';
 import AddItem from '../addItem/addItem';
 import SingleItem from '../singleItem/singleItem';
@@ -31,11 +32,13 @@ class App extends Component {
     this.state = {
       currentUser: null,
       isAuthenticated: false,
+      userHasAuthenticated: false,
       isLoading: false
     }
     this.handleLogout = this.handleLogout.bind(this);
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.requireAuth = this.requireAuth(this);
 
     notification.config({
       placement: 'topRight',
@@ -96,6 +99,24 @@ class App extends Component {
     this.props.history.push("/");
   }
 
+  requireAuth(nextState, replace) {
+    console.log("UI- requireAuth :"+localStorage.getItem(ACCESS_TOKEN))
+    const token = localStorage.getItem(ACCESS_TOKEN)
+    console.log("UI- token "+token)
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+      console.log("UI- :::::::::::::::::::::::::::::::::::::::::: NUKK")
+      return <Redirect to={"/login"} />;
+      // replace({
+      //   pathname: "/login",
+      //   state: {nextPathname: nextState.location.pathname}
+      // });
+    }else{
+      console.log("UI- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+    }
+  }
+
+  
+
   render() {
     if(this.state.isLoading) {
       return <LoadingIndicator />
@@ -111,7 +132,8 @@ class App extends Component {
               <Switch>      
                 <Route exact path="/" 
                   render={(props) => <PollList isAuthenticated={this.state.isAuthenticated} 
-                      currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                      currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />} 
+                      onEnter={this.requireAuth}>
                 </Route>
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
@@ -119,6 +141,7 @@ class App extends Component {
                 <Route path="/home" component={Home}></Route>
                 <Route path="/additem" component={AddItem}></Route>
                 <Route path="/item" component={SingleItem}></Route>
+                <Route path="/forgot-password" component={ForgotPassword}></Route>
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
