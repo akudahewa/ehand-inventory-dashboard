@@ -1,6 +1,6 @@
 .app-title {
     float: left;
-    margin-left: 20px;
+    margin-left: 280px;
   }
   
   .app-title a {
@@ -85,8 +85,12 @@
   }
 
 @media (max-width: 768px) {
+  .app-title{
+    margin-left: 80px;
+  }
   .app-title a {
     font-size: 20px;
+    
   }
 
   .app-menu > li {

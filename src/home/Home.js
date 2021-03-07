@@ -30,15 +30,22 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
-    background:'#259392',
+    background:'#fff',
+    width:60,
+    left:0,
+    height:64,
+    boxShadow:'none',
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-      background:'#259392'
+      background:'#259392',
+      display:'none',
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    marginTop:8,
+    color:'#259392',
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
