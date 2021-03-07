@@ -87,12 +87,12 @@ export default function DrawerComponent(props) {
           </ListItemIcon>
           <ListItemText>Add Item</ListItemText>
         </ListItem>
-        <ListItem button={true} onClick={handleListItem} >
+        {/* <ListItem button={true} onClick={handleListItem} >
           <ListItemIcon>
             <ExitToAppIcon style={{ color: '#ff212b' }} />
           </ListItemIcon>
           <ListItemText>Logout</ListItemText>
-        </ListItem>
+        </ListItem> */}
       </List>
     </div>
   );
