@@ -22,12 +22,14 @@ import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
 import PrivateRoute from '../common/PrivateRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 import { Layout, notification } from 'antd';
 const { Content } = Layout;
 
 class App extends Component {
   constructor(props) {
+    console.log("UI- App.js props in constructor ->"+JSON.stringify(props));
     super(props);
     this.state = {
       currentUser: null,
@@ -74,6 +76,7 @@ class App extends Component {
   }
 
   handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
+    alert("app- logout")
     localStorage.removeItem(ACCESS_TOKEN);
 
     this.setState({
@@ -104,24 +107,33 @@ class App extends Component {
     const token = localStorage.getItem(ACCESS_TOKEN)
     console.log("UI- token "+token)
     if(!localStorage.getItem(ACCESS_TOKEN)) {
-      console.log("UI- :::::::::::::::::::::::::::::::::::::::::: NUKK")
-      return <Redirect to={"/login"} />;
+      console.log("UI- ACCESS TOKEN is NULL :"+localStorage.getItem(ACCESS_TOKEN))
+      //return <Redirect to={{pathname:"/login"}} />;
       // replace({
       //   pathname: "/login",
       //   state: {nextPathname: nextState.location.pathname}
       // });
     }else{
-      console.log("UI- mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+      console.log("UI- ACCESS TOKEN is NOT-NULL"+localStorage.getItem(ACCESS_TOKEN));
     }
   }
 
   
 
   render() {
+    console.log("UI- App.js ->Rendering App js file props :"+JSON.stringify(this.props));
     if(this.state.isLoading) {
       return <LoadingIndicator />
     }
+    if(this.state.notFound) {
+      return <NotFound />;
+  }
+    if (!this.state.isAuthenticated) {
+      console.log("UI- App.js -> Redirect to login controller: "+!this.props.isAuthenticated)
+         return <Login onLogin={this.handleLogin}   />;
+    }
     return (
+      
         <Layout className="app-container">
           <AppHeader isAuthenticated={this.state.isAuthenticated} 
             currentUser={this.state.currentUser} 
@@ -138,7 +150,8 @@ class App extends Component {
                 <Route path="/login" 
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
                 <Route path="/signup" component={Signup}></Route>
-                <Route path="/home" component={Home}></Route>
+                <ProtectedRoute path="/home" component={Home} isAuthenticated={this.state.isAuthenticated} 
+                      currentUser={this.state.currentUser} onLogout={this.handleLogout}></ProtectedRoute>
                 <Route path="/additem" component={AddItem}></Route>
                 <Route path="/item" component={SingleItem}></Route>
                 <Route path="/forgot-password" component={ForgotPassword}></Route>

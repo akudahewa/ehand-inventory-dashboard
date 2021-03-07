@@ -10,6 +10,7 @@ const Header = Layout.Header;
     
 class AppHeader extends Component {
     constructor(props) {
+      console.log("UI- AppHeader.js constructor : "+JSON.stringify(props));
         super(props);   
         this.handleMenuClick = this.handleMenuClick.bind(this);   
     }
@@ -55,7 +56,7 @@ class AppHeader extends Component {
             <Header className="app-header">
             <div className="container">
               <div className="app-title" >
-                <Link to="/">Inventory Manager</Link>
+                <Link to="/">Ehand WEB Portal </Link>
               </div>
               <Menu
                 className="app-menu"
@@ -71,6 +72,7 @@ class AppHeader extends Component {
 }
 
 function ProfileDropdownMenu(props) {
+  console.log("UI- ProfileDropdownMenu ->props : "+JSON.stringify(props))
   const dropdownMenu = (
     <Menu onClick={props.handleMenuClick} className="profile-dropdown-menu">
       <Menu.Item key="user-info" className="dropdown-item" disabled>

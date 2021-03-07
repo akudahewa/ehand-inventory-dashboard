@@ -17,10 +17,10 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import { Link } from 'react-router-dom';
 class PollList extends Component {
   constructor(props) {
+    super(props);
     console.log("UI- PollList.js -> between constructor ");
     console.log("UI- PollList.js ->props :" + JSON.stringify(props));
     console.log("UI- PollList.js -> between constructor ");
-    super(props);
     this.state = {
       polls: [],
       page: 0,
@@ -164,21 +164,20 @@ class PollList extends Component {
       });
   }
 
-  privilegeMatrix(previlege){
-     console.log("UI-PollList.js -> privilegeMatrix "+this.props.currentUser)
-     console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser.privileges.includes(previlege))
-     if(this.props.currentUser.privileges.includes(previlege)){
-         return true
+  applicationMatrix(module){
+     console.log("UI-PollList.js -> privilegeMatrix "+module)
+     console.log("UI-PollList.js -> privilegeMatrix include : "+this.props.currentUser)
+     if (this.props.currentUser !=undefined && this.props.currentUser.modules.some(e => e.module === module)) {
+        return true;
      }else{
-         return false;
+       return false;
      }
-
   }
 
   render() {
-    if (!this.props.isAuthenticated) {
-      return <Redirect to={{ pathname: "/login" }} />;
-    } else {
+    // if (!this.props.isAuthenticated) {
+    //   return <Redirect to={{ pathname: "/login" }} />;
+    // } else {
       const pollViews = [];
       this.state.polls.forEach((poll, pollIndex) => {
         pollViews.push(
@@ -199,7 +198,7 @@ class PollList extends Component {
       return (
         <div className="polls-container">
           <Container maxWidth="lg" className="catItemContainer">
-            <Link to={"/home"}>
+            <Link to={"/home"} disabled={!this.applicationMatrix("INVENTORY")}>
               <Paper className="singleCatItem cat-inventry" elevation={3}>
                 <ListAltIcon
                   style={{ fontSize: "65px" }}
@@ -208,12 +207,21 @@ class PollList extends Component {
                 <div className="catItemLabel">Inventry Management</div>
               </Paper>
             </Link>
-            <Button type="primary" disabled={!this.privilegeMatrix("LISTING_PRIVILEGE")} >Inventory Manager</Button>
-                <Button type="primary" disabled={!this.privilegeMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button>
+            <Link to={"/home"} disabled={!this.applicationMatrix("ORDER")}>
+              <Paper className="singleCatItem cat-inventry" elevation={3}>
+                <ListAltIcon
+                  style={{ fontSize: "65px" }}
+                  className="catItemIcon"
+                />
+                <div className="catItemLabel">Order Management</div>
+              </Paper>
+            </Link>
+            {/* <Button type="primary" disabled={!this.applicationMatrix("INVENTORY")} >Inventory Manager</Button> */}
+                {/* <Button type="primary" disabled={!this.applicationMatrix("MANAGE_PRIVILEGE")}>Sample ..</Button> */}
           </Container>
           </div>
       )
-    }
+    // }
   }
 }
 

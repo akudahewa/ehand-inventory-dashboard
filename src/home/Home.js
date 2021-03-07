@@ -65,10 +65,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home(props) {
+  console.log("UI- Home.js -> Calling home function :props:"+JSON.stringify(props));
+  // const {HomeProfile} = ({isAuthenticated, currentUser }) => {...}
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -80,6 +83,27 @@ function Home(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+    // handleListItemClick({ key }) {
+    //   if(key === "logout") {
+    //     this.props.onLogout();
+    //   }
+    // }
+    // const handleListItemClick=()=> {
+    //   alert("Home-logout")
+    //   console.log("UI- Home.js-> handleListItemClick ")
+    //   //  if(key === "logout") {
+    //     props.logoutClick();
+    //   //  }
+    // }
+
+    const handleListItemClick=()=>{
+      alert("Home-logout")
+      console.log("UI- Home.js-> handleListItemClick ")
+      //  if(key === "logout") {
+        props.logoutClick();
+    }
+
 
   return (
     <div className={classes.root}>
@@ -116,7 +140,7 @@ function Home(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <DrawerComponent/>
+            <DrawerComponent logoutClick={()=>handleListItemClick()}/>
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -138,7 +162,7 @@ function Home(props) {
         </div>
 
         <Grid container spacing={3}>
-          <CardComponent />
+          <CardComponent isAuthenticated={props.isAuthenticated} currentUser={props.currentUser} />
         </Grid>
       </main>
     </div>

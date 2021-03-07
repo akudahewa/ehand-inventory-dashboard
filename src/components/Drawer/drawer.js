@@ -46,8 +46,22 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function DrawerComponent() {
+export default function DrawerComponent(props) {
   const classes = useStyles();
+
+  const handleListItem=()=> {
+    alert("Drawer- logout")
+     console.log("UI- Drawer.js-> handleListItemClick "+JSON.stringify(props))
+    //  if(key === "logout") {
+       props.logoutClick();
+    //  }
+  }
+  // const handleListItemClick=({key})=> {
+  //   console.log("UI- Home.js-> handleListItemClick ")
+  //    if(key === "logout") {
+  //     props.logoutClick();
+  //    }
+  // }
  
   return (
     <div>
@@ -60,7 +74,7 @@ export default function DrawerComponent() {
         />
       </div>
       <Divider />
-      <List>
+      <List >
         <ListItem button={true} {...{ component: NavLink, to: "/home" }}>
           <ListItemIcon>
             <DashboardIcon style={{ color: '#038b8d' }} />
@@ -73,7 +87,7 @@ export default function DrawerComponent() {
           </ListItemIcon>
           <ListItemText>Add Item</ListItemText>
         </ListItem>
-        <ListItem button={true} {...{ component: NavLink, to: "/login" }}>
+        <ListItem button={true} onClick={handleListItem} >
           <ListItemIcon>
             <ExitToAppIcon style={{ color: '#ff212b' }} />
           </ListItemIcon>
