@@ -14,6 +14,7 @@ const TabPane = Tabs.TabPane;
 class Profile extends Component {
     constructor(props) {
         super(props);
+        console.log("UI- !!!!!!!!! profile !!!!!!!!!!!!!!!!!! "+JSON.stringify(props));
         this.state = {
             user: null,
             isLoading: false
@@ -48,6 +49,7 @@ class Profile extends Component {
     }
       
     componentDidMount() {
+        console.log("UI- ============== componentDidMount ============ "+JSON.stringify(this.props));
         const username = this.props.match.params.username;
         this.loadUserProfile(username);
     }

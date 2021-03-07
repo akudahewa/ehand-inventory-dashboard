@@ -22,8 +22,9 @@ class Login extends Component {
 }
 
 class LoginForm extends Component {
-    constructor(props) {
+    constructor(props) { 
         super(props);
+        console.log("UI- Login.js inside constructor ,proprs :"+JSON.stringify(props));
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -38,6 +39,8 @@ class LoginForm extends Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     this.props.onLogin();
+                    console.log("UI- Login.js After Login ,proprs :"+JSON.stringify(this.props));
+                    
                 }).catch(error => {
                     if(error.status === 401) {
                         notification.error({
@@ -84,6 +87,7 @@ class LoginForm extends Component {
                 </FormItem>
                 <FormItem>
                     <Button type="primary" htmlType="submit" size="large" className="login-form-button">Login</Button>
+                    <Link to="/forgot-password">Forgot password?</Link>
                     Or <Link to="/signup">register now!</Link>
                 </FormItem>
             </Form>

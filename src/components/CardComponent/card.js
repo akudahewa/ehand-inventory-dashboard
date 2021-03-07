@@ -35,12 +35,14 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ImgMediaCard() {
+export default function ImgMediaCard(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("https://ehand-inventory-service.herokuapp.com/inventory-service/api/shops/1/items?page=0&size=10&sort=createdAt,desc")
+    if(props.currentUser.privileges.includes('LISTING_PRIVILEGE1')){
+      alert("has prvileges")
+      fetch("https://ehand-inventory-service.herokuapp.com/inventory-service/api/shops/1/items?page=0&size=10&sort=createdAt,desc")
       .then(res => res.json())
       .then(
         (result) => {
@@ -57,13 +59,19 @@ export default function ImgMediaCard() {
           alert(error);
         }
       )
+    }else{
+      alert("dont have previlege")
+      setIsLoaded(true);
+      setError("Dont have privilege to listing the items");
+          // alert(error);
+    }
   }, [])
   const classes = useStyles();
   
 
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {error}</div>;
   } else if (!isLoaded) {
     return <div className={classes.loadingContainer}>Loading...</div>;
   } else {
